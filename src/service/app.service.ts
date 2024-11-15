@@ -1,6 +1,6 @@
-import { File_processor } from './file_processor';
+import { FileProcessorService } from './file-processor.service';
 
-export class App {
+export class AppService {
     static run(): void {
         const args = process.argv.slice(2);
 
@@ -10,7 +10,7 @@ export class App {
         }
 
         const [inputFile, outputFile] = args;
-        const generator = new File_processor(inputFile, outputFile);
+        const generator = new FileProcessorService(inputFile, outputFile);
         generator.generate();
     }
 }

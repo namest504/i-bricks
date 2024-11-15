@@ -1,3 +1,3 @@
-import { App } from './app';
+import { AppService } from './src/service/app.service';
 
-App.run();
+AppService.run();

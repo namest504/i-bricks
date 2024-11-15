@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-export class File_processor {
+export class FileProcessorService {
     private inputFile: string;
     private outputFile: string;
     private invertedFile: Map<string, Map<number, number>>;
@@ -44,7 +44,11 @@ export class File_processor {
         return sortedWords.map(word => {
             const docMap = this.invertedFile.get(word)!;
             const sortedDocs = Array.from(docMap.entries())
-                .sort((a, b) => b[1] - a[1] || a[0] - b[0])
+                .sort((entryA, entryB) => {
+                    const [docIdA, freqA] = entryA;
+                    const [docIdB, freqB] = entryB;
+                    return freqB - freqA || docIdA - docIdB;
+                })
                 .map(([docId, freq]) => `${docId} ${freq}`)
                 .join(' ');
             return `${word} ${sortedDocs}`;

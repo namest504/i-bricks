@@ -1,4 +1,4 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var app_1 = require("./app");
-app_1.App.run();
+const app_service_1 = require("./src/service/app.service");
+app_service_1.AppService.run();
