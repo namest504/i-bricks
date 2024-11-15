@@ -7,12 +7,12 @@ export class InputValidatorService {
             const contentString = content.join(' ');
 
             if (!this.isValidDocId(docId)) {
-                console.warn(`Invalid document ID: ${docId}`);
+                console.warn(`유효하지 않은 문서 ID: ${docId}`);
                 return false;
             }
 
             if (!this.isValidContent(contentString)) {
-                console.warn(`Invalid content for document ${docId}: Content exceeds ${this.MAX_CONTENT_LENGTH} bytes or contains invalid characters`);
+                console.warn(`문서 ${docId}의 내용이 유효하지 않음: 내용이 ${this.MAX_CONTENT_LENGTH} 바이트를 초과하거나 유효하지 않은 문자를 포함하고 있습니다`);
                 return false;
             }
 
