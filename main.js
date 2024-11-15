@@ -36,14 +36,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var file_processor_service_1 = require("./src/service/file-processor.service");
 var file_io_service_1 = require("./src/io/file-io.service");
-var word_splitter_service_1 = require("./src/service/word-splitter.service");
-var inverted_file_creator_service_1 = require("./src/service/inverted-file-creator.service");
+var file_processor_service_1 = require("./src/service/file-processor.service");
 var result_formatter_service_1 = require("./src/service/result-formatter.service");
+var inverted_file_creator_service_1 = require("./src/service/inverted-file-creator.service");
+var word_splitter_service_1 = require("./src/service/word-splitter.service");
+var input_validator_service_1 = require("./src/service/input-validator.service");
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var args, inputFile, outputFile, inputData, wordSplitter, invertedFileCreator, resultFormatter, fileProcessor, result;
+        var args, inputFile, outputFile, inputData, inputValidator, validatedInput, wordSplitter, invertedFileCreator, resultFormatter, fileProcessor, result;
         return __generator(this, function (_a) {
             args = process.argv.slice(2);
             if (args.length !== 2) {
@@ -53,13 +54,14 @@ function main() {
             inputFile = args[0], outputFile = args[1];
             try {
                 inputData = file_io_service_1.FileIoService.readInputFile(inputFile);
+                inputValidator = new input_validator_service_1.InputValidatorService();
+                validatedInput = inputValidator.validateInput(inputData);
                 wordSplitter = new word_splitter_service_1.WordSplitterService();
                 invertedFileCreator = new inverted_file_creator_service_1.InvertedFileCreatorService(wordSplitter);
                 resultFormatter = new result_formatter_service_1.ResultFormatterService();
                 fileProcessor = new file_processor_service_1.FileProcessorService(invertedFileCreator, resultFormatter);
-                result = fileProcessor.processFile(inputData);
+                result = fileProcessor.processFile(validatedInput);
                 file_io_service_1.FileIoService.writeOutputFile(outputFile, result);
-                console.log("역파일 생성 완료");
             }
             catch (error) {
                 console.error('처리 중 오류 발생:', error);
