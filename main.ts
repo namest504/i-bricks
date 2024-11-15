@@ -35,7 +35,7 @@ async function main(): Promise<void> {
 
 if (require.main === module) {
     main().catch(error => {
-        console.error('Unhandled error:', error);
+        console.error('Unhandled 예외 발생:', error);
         process.exit(1);
     });
 }
