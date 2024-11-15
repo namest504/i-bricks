@@ -24,7 +24,6 @@ async function main(): Promise<void> {
 
         const result = fileProcessor.processFile(inputData);
         FileIoService.writeOutputFile(outputFile, result);
-        console.log("역파일 생성 완료");
     } catch (error) {
         console.error('처리 중 오류 발생:', error);
     }
